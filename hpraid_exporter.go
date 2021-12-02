@@ -25,9 +25,10 @@ import (
 	"os/exec"
 	"path/filepath"
 	"sync"
+
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/common/log"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/prometheus/common/log"
 )
 
 var (
@@ -115,7 +116,7 @@ func collectFromUtility(utilityPath string, ch chan<- prometheus.Metric) error {
 	if err != nil {
 		return fmt.Errorf("failed to create temporary zip path: %s", err)
 	}
-	log.Info("Using %s as temporary zip directory - ", tempDir)
+	log.Infof("Using %s as temporary zip directory - ", tempDir)
 	defer os.RemoveAll(tempDir)
 
 	temporaryZipPath := filepath.Join(tempDir, "hpraid_exporter.zip")
@@ -200,7 +201,7 @@ func main() {
 
 	http.Handle(*metricsPath, promhttp.Handler())
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`
+		_, _ = w.Write([]byte(`
 			<html>
 			<head><title>Hpraid Exporter</title></head>
 			<body>
