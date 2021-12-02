@@ -115,7 +115,7 @@ func collectFromUtility(utilityPath string, ch chan<- prometheus.Metric) error {
 	if err != nil {
 		return fmt.Errorf("failed to create temporary zip path: %s", err)
 	}
-	log.Info("Using %s as temporary zip directory - ", tempDir)
+	log.Infof("Using %s as temporary zip directory - ", tempDir)
 	defer os.RemoveAll(tempDir)
 
 	temporaryZipPath := filepath.Join(tempDir, "hpraid_exporter.zip")
