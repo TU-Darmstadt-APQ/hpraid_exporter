@@ -25,9 +25,10 @@ import (
 	"os/exec"
 	"path/filepath"
 	"sync"
+
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/common/log"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/prometheus/common/log"
 )
 
 var (
